@@ -55,7 +55,7 @@ export function DashboardLayout({ children }) {
           <Icon name="graduation cap" />
           {!collapsed && <span>Tryout</span>}
         </Menu.Item>
-        <Menu.Item as="a" style={{ color: "white" }}>
+        <Menu.Item onClick={() => navigate('/Histori-Tryout')} as="a" style={{ color: "white" }}>
           <Icon name="history" />
           {!collapsed && <span>Riwayat Tryout</span>}
         </Menu.Item>

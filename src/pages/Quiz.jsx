@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Progress } from "semantic-ui-react";
 import { CheckCircle, Clock, AlertCircle, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -6,6 +6,23 @@ const QuizPage = () => {
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const totalQuestions = 50;
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
+
+  const [timeLeft, setTimeLeft] = useState(90 * 60); 
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatTime = (seconds) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+  };
 
   const handleNext = () => {
     if (currentQuestion < totalQuestions) setCurrentQuestion(currentQuestion + 1);
@@ -29,7 +46,7 @@ const QuizPage = () => {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 text-md md:text-lg">
             <Clock className="w-5 h-5" />
-            01:29:57
+            {formatTime(timeLeft)}
           </div>
           <button className="bg-red-600 hover:bg-red-700 px-3 py-2 rounded-lg text-sm font-semibold">
             SELESAI

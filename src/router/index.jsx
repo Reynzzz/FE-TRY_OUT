@@ -5,6 +5,7 @@ import DashboardPage from "../pages/Dashboard";
 import ChooseTryOut from "../pages/ChooseTryOut";
 import Subcategory from "../pages/ChooseSubCategoryTryout";
 import QuizPage from "../pages/Quiz";
+import RiwayatTryOut from "../pages/RiwayatTryout";
 
 const router = createBrowserRouter([
             {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
             {
                 element : <QuizPage/>,
                 path : '/ujian'
+            },
+            {
+                element : <RiwayatTryOut/>,
+                path : '/Histori-Tryout'
             }
         
 ])
