@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Progress } from "semantic-ui-react";
-import { CheckCircle, Clock, AlertCircle, ChevronLeft, ChevronRight } from "lucide-react";
+import { CheckCircle, Clock, AlertCircle, ChevronLeft } from "lucide-react";
 
-const QuizPage = () => {
+const KecermatanQuiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const totalQuestions = 50;
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
-  const [answers, setAnswers] = useState({}); // Menyimpan jawaban untuk setiap soal
+  const [answers, setAnswers] = useState({});
   const [timeLeft, setTimeLeft] = useState(90 * 60);
-  const [showModal, setShowModal] = useState(false); // State untuk modal konfirmasi
+  const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
@@ -18,16 +19,9 @@ const QuizPage = () => {
   }, []);
 
   const formatTime = (seconds) => {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
+    const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
-  };
-
-  const handleNext = () => {
-    if (currentQuestion < totalQuestions) {
-      setCurrentQuestion(currentQuestion + 1);
-    }
+    return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
   };
 
   const handlePrevious = () => {
@@ -39,16 +33,21 @@ const QuizPage = () => {
   const handleAnswer = (questionNumber, option) => {
     setAnswers((prev) => ({
       ...prev,
-      [questionNumber]: option, // Simpan jawaban untuk pertanyaan tertentu
+      [questionNumber]: option,
     }));
 
     if (!answeredQuestions.includes(questionNumber)) {
       setAnsweredQuestions([...answeredQuestions, questionNumber]);
     }
+
+    // Jika belum soal terakhir, langsung pindah ke soal berikutnya
+    if (questionNumber < totalQuestions) {
+      setTimeout(() => setCurrentQuestion(questionNumber + 1), 200);
+    }
   };
 
   const handleFinish = () => {
-    setShowModal(true); // Tampilkan modal saat tombol SELESAI ditekan
+    setShowModal(true);
   };
 
   const confirmFinish = () => {
@@ -105,7 +104,7 @@ const QuizPage = () => {
               ))}
             </div>
           </div>
-          <div className="flex justify-between">
+          {/* <div className="flex justify-start">
             <button
               disabled={currentQuestion === 1}
               onClick={handlePrevious}
@@ -116,19 +115,7 @@ const QuizPage = () => {
               <ChevronLeft className="w-4 h-4" />
               Previous
             </button>
-            <button
-              disabled={currentQuestion === totalQuestions}
-              onClick={handleNext}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm ${
-                currentQuestion === totalQuestions
-                  ? "bg-gray-300 cursor-not-allowed"
-                  : "bg-blue-600 text-white hover:bg-blue-700"
-              }`}
-            >
-              Next
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
+          </div> */}
         </div>
 
         {/* Navigation Section */}
@@ -191,4 +178,4 @@ const QuizPage = () => {
   );
 };
 
-export default QuizPage;
+export default KecermatanQuiz;

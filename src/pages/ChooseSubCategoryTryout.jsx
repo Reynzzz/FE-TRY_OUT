@@ -5,11 +5,12 @@ import { DashboardLayout } from '../components/molekul/Sidebar';
 
 export default function ChooseTryOut() {
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);  // State to manage modal visibility
+  const [open, setOpen] = useState(false);
+  const [examPath, setExamPath] = useState(''); // State untuk menyimpan tujuan navigasi
 
   const handleStartExam = () => {
-    setOpen(false);  // Close the confirmation modal
-    navigate('/ujian');  // Navigate to the exam page
+    setOpen(false);
+    navigate(examPath); // Arahkan ke path yang sudah disimpan
   };
 
   return (
@@ -35,7 +36,10 @@ export default function ChooseTryOut() {
               <Button 
                 color="blue" 
                 attached="bottom"
-                onClick={() => setOpen(true)}  // Show the confirmation modal
+                onClick={() => {
+                  setExamPath('/ujian'); // Default ke "/ujian"
+                  setOpen(true);
+                }}
               >
                 Mulai Ujian
               </Button>
@@ -57,7 +61,10 @@ export default function ChooseTryOut() {
               <Button 
                 color="blue" 
                 attached="bottom"
-                onClick={() => setOpen(true)}  // Show the confirmation modal
+                onClick={() => {
+                  setExamPath('/ujian/kecermatan'); // Arahkan ke "/ujian/kecermatan"
+                  setOpen(true);
+                }}
               >
                 Mulai Ujian
               </Button>
@@ -79,7 +86,10 @@ export default function ChooseTryOut() {
               <Button 
                 color="blue" 
                 attached="bottom"
-                onClick={() => setOpen(true)}  // Show the confirmation modal
+                onClick={() => {
+                  setExamPath('/ujian'); // Default ke "/ujian"
+                  setOpen(true);
+                }}
               >
                 Mulai Ujian
               </Button>
@@ -91,7 +101,7 @@ export default function ChooseTryOut() {
         {/* Confirmation Modal */}
         <Modal 
           open={open} 
-          onClose={() => setOpen(false)}  // Close the modal if clicked outside or on the close button
+          onClose={() => setOpen(false)}
         >
           <Modal.Header>Konfirmasi</Modal.Header>
           <Modal.Content>

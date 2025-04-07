@@ -1,36 +1,52 @@
 import React from "react";
 import { Button, Card, Icon, Table } from "semantic-ui-react";
 import { DashboardLayout } from "../components/molekul/Sidebar";
-
+import { useNavigate } from "react-router-dom";
+import Logo from '../assets/Logo-1.png'
 export default function DashboardPage() {
+  const navigate = useNavigate()
   return (
     <DashboardLayout>
       {/* Header Section - Removed padding and added margin 0 */}
       <header
-        style={{
-          padding: "0 20px",
-          backgroundColor: "#1a73e8", 
-          color: "#fff",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          height: "64px", // Added fixed height for consistency
-        }}
-      >
-        <h1 style={{ margin: 0, fontSize: "1.75rem" }}>Dashboard</h1>
-        <Button
-          primary
-          style={{
-            backgroundColor: "#fff",
-            color: "#1a73e8",
-          }}
-        >
-          <Icon name="sign-out" />
-          Logout
-        </Button>
-      </header>
+      
+  style={{
+    padding: "0 20px",
+    backgroundColor: "#fbfbfb",
+    color: "#fff",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    height: "64px", // Fixed height
+    boxShadow : '200px'
+  }}
+>
+  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+    {/* Logo */}
+    <img
+      src={Logo} // Ganti dengan path logo Anda
+      alt="Logo"
+      // style={{ height: "40px" }} // Sesuaikan ukuran logo
+      className="w-[280px]"
+    />
+   
+  </div>
+  <Button
+    onClick={() => navigate('/Login')}
+    primary
+    style={{
+      backgroundColor: "#1a73e8",
+      color: "#fff",
+    }}
+  >
+    <Icon name="sign-out" />
+    Logout
+  </Button>
+</header>
+
 
       {/* Rest of the component remains unchanged */}
+      <div className="p-5 bg-gray-200 min-h-screen">
       <div style={{ padding: "20px" }}>
         <Card fluid>
           <Card.Content>
@@ -96,6 +112,7 @@ export default function DashboardPage() {
             </Table>
           </Card.Content>
         </Card>
+      </div>
       </div>
     </DashboardLayout>
   );

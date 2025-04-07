@@ -1,0 +1,1 @@
+// ini buat naruh typenya nah di reduces itu untuk buat state 

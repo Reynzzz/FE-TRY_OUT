@@ -1,91 +1,104 @@
-// src/pages/Register.js
 import React from 'react';
-import { Input, Button, Form, Icon, Dropdown } from 'semantic-ui-react';
+import { useNavigate } from 'react-router-dom';
+import { Input, Button, Form } from 'semantic-ui-react';
+import { Mail, Lock, User, CreditCard } from 'lucide-react';
+import Logo from '../assets/logo-1.png';
+import { motion } from 'framer-motion';
 
 function Register() {
-  // Opsi kelas untuk dropdown kelas
-  const classOptions = [
-    { key: '10', text: 'Kelas 10', value: '10' },
-    { key: '11', text: 'Kelas 11', value: '11' },
-    { key: '12', text: 'Kelas 12', value: '12' },
-  ];
+  const navigate = useNavigate();
 
   return (
-    <div 
-      className="flex items-center justify-center min-h-screen bg-gray-100"
+    <motion.div
+      initial={{ x: '100%', opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: '-100%', opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-900 to-indigo-800 text-white"
     >
-      <div className="w-full max-w-lg p-10 space-y-6 bg-white bg-opacity-90 backdrop-blur-lg rounded-lg shadow-2xl">
-        <h2 className="text-3xl font-bold text-center text-gray-800">
-          Register for Try Out
-        </h2>
-        <p className="text-center text-gray-600">Mulai perjalanan persiapan ujian Anda!</p>
+      <div className="flex w-full max-w-4xl h-full bg-white text-gray-800 rounded-lg shadow-xl overflow-hidden">
+        {/* Form Section */}
+        <div className="w-1/2 p-8 space-y-6">
+          <h2 className="text-3xl font-extrabold text-center">Register</h2>
 
-        <Form className="space-y-4">
-          <Form.Field>
-            <label className="block mb-1 text-gray-700">Nama Lengkap</label>
-            <Input 
-              fluid 
-              icon="user" 
-              iconPosition="left" 
-              placeholder="Masukkan nama lengkap" 
-              className="p-2 border rounded-md"
-            />
-          </Form.Field>
+          <Form className="space-y-4">
+            <Form.Field>
+              <label className="block mb-1 font-medium">Nama Lengkap</label>
+              <div className="relative">
+                <User className="absolute left-3 top-3 text-gray-500" size={20} />
+                <Input 
+                  fluid 
+                  placeholder="Masukkan nama lengkap" 
+                  className="pl-10 p-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </Form.Field>
 
-          <Form.Field>
-            <label className="block mb-1 text-gray-700">Email</label>
-            <Input 
-              fluid 
-              icon="mail" 
-              iconPosition="left" 
-              placeholder="Masukkan email" 
-              className="p-2 border rounded-md"
-            />
-          </Form.Field>
+            <Form.Field>
+              <label className="block mb-1 font-medium">Email</label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-3 text-gray-500" size={20} />
+                <Input 
+                  fluid 
+                  placeholder="Masukkan email" 
+                  className="pl-10 p-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </Form.Field>
 
-          <Form.Field>
-            <label className="block mb-1 text-gray-700">Password</label>
-            <Input 
-              fluid 
-              icon="lock" 
-              iconPosition="left" 
-              type="password" 
-              placeholder="Masukkan password" 
-              className="p-2 border rounded-md"
-            />
-          </Form.Field>
+            <Form.Field>
+              <label className="block mb-1 font-medium">Password</label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-3 text-gray-500" size={20} />
+                <Input 
+                  fluid 
+                  type="password" 
+                  placeholder="Masukkan password" 
+                  className="pl-10 p-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </Form.Field>
 
-          {/* <Form.Field>
-            <label className="block mb-1 text-gray-700">Jenis Try</label>
-            <Dropdown 
-              placeholder="Pilih kelas" 
-              fluid 
-              selection 
-              options={classOptions}
-              className="rounded-md"
-            />
-          </Form.Field> */}
+            <Form.Field>
+              <label className="block mb-1 font-medium">Nomor Rekening</label>
+              <div className="relative">
+                <CreditCard className="absolute left-3 top-3 text-gray-500" size={20} />
+                <Input 
+                  fluid 
+                  placeholder="Masukkan nomor rekening" 
+                  className="pl-10 p-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </Form.Field>
 
-          <Button 
-            primary 
-            fluid 
-            className="mt-6"
-          >
-            <Icon name="signup" />
-            Daftar Sekarang
-          </Button>
-        </Form>
+            <Button 
+              className="w-full py-3 mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-lg transition-transform transform hover:scale-105"
+            >
+              Daftar Sekarang
+            </Button>
+          </Form>
 
-        <div className="text-center">
-          <p className="text-gray-700">
-            Sudah punya akun?{' '}
-            <a href="/login" className="text-blue-600 hover:underline">
-              Login
-            </a>
-          </p>
+          <div className="text-center">
+            <p className="text-gray-600">
+              Sudah punya akun?{' '}
+              <a 
+                href="/login" 
+                className="text-blue-500 hover:underline"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate('/login');
+                }}
+              >Login</a>
+            </p>
+          </div>
+        </div>
+
+        {/* Logo Section */}
+        <div className="relative w-1/2 flex items-center justify-center bg-gray-800">
+          <img src={Logo} alt="Logo" className="absolute w-[400px]" />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

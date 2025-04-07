@@ -47,7 +47,7 @@ export function DashboardLayout({ children }) {
             </Button>
           </div>
         </Menu.Item>
-        <Menu.Item onClick={() => navigate('/')} as="a" style={{ color: "white" }}>
+        <Menu.Item onClick={() => navigate('/dashboard')} as="a" style={{ color: "white" }}>
           <Icon name="dashboard" />
           {!collapsed && <span>Dashboard</span>}
         </Menu.Item>
@@ -59,28 +59,31 @@ export function DashboardLayout({ children }) {
           <Icon name="history" />
           {!collapsed && <span>Riwayat Tryout</span>}
         </Menu.Item>
-        <Menu.Item as="a" style={{ color: "white" }}>
+        <Menu.Item onClick={() => navigate('/Skor-Ujian')} as="a" style={{ color: "white" }}>
           <Icon name="file alternate" />
           {!collapsed && <span>Skor Ujian</span>}
+        </Menu.Item>
+        <Menu.Item onClick={() => navigate('/score-page')} as="a" style={{ color: "white" }}>
+          <Icon name="chart line" />
+          {!collapsed && <span>Peringkat Skor</span>}
         </Menu.Item>
       </Sidebar>
 
       {/* Main Content */}
       <Segment
-  basic
-  style={{
-    marginLeft: collapsed ? "60px" : "250px",
-    transition: "margin-left 0.3s ease",
-    flex: 1,
-    backgroundColor: "white", // Latar belakang konten utama
-    color: "#0a284b", // Teks utama
-    padding: 0, // Menghapus padding atas
-    marginTop : 0
-  }}
->
-  <div>{children}</div>
-</Segment>
-
+        basic
+        style={{
+          marginLeft: collapsed ? "60px" : "250px",
+          transition: "margin-left 0.3s ease",
+          flex: 1,
+          backgroundColor: "white", // Latar belakang konten utama
+          color: "#0a284b", // Teks utama
+          padding: 0, // Menghapus padding atas
+          marginTop: 0
+        }}
+      >
+        <div>{children}</div>
+      </Segment>
     </div>
   );
 }

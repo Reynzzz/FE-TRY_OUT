@@ -12,8 +12,8 @@ export default function ChooseTryOut() {
 
   return (
     <DashboardLayout>
-      <div className="p-10">
-        <section className="bg-white p-6 rounded-lg shadow-lg text-blue-900">
+      <div className="p-10 bg-gray-200 min-h-screen">
+        <section className=" bg-white p-6 rounded-lg shadow-lg text-blue-900">
           <h2 className="text-2xl font-semibold mb-4">Pilih Tipe Ujian</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card 
